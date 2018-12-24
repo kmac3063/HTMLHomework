@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Задание 5 JQ</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+	<div style="border: 3px dotted red; width: 12%">
+		<a href="indexJS.html">Реализация на JS</a>
+		<p style="margin: 0"><a href="indexJQuery.html">Реализация на JQuery</a></p>
+	</div>
+	<script type="text/javascript">
+		m = [
+			{
+			text: 'Животные',
+			childs: [
+					{text: 'Млекопитающие', 
+					childs: ['Коровы', 'Ослы', 'Собаки', 'Тигры']},
+					
+					{text: 'Другие', 
+					childs: ['Змеи', 'Птицы', 'Ящерицы']}
+					]},
+			{
+			text: 'Рыбы',
+			childs: [
+					{text: 'Аквариумные', 
+					childs: ['Гуппи','Скалярии']},
+					
+					{
+					text: 'Морские', 
+					childs: ['Морская форель']}
+					]},
+			{
+			text: 'Вирусы', 
+			childs: [
+					{
+					text:'Жизненный цикл вируса', 
+					childs: ['Прикрепление', 'Проникновение', 'Лишение оболочек', {	text:'Репликация', 
+																					childs: ['Сбор'] }, 'Выход из клетки']},
+					{
+					text:'Капсид', 
+					childs: ['Спиральный', 'Икосаэдрический', 'Продолговатый', 	'Комплексный']}
+					]}
+			];
+		
+		function Gen(childs) {
+			var ul = $('<ul/>');
+			for (var child of childs) {
+				var li = $('<li/>');
+				if (child.text !== undefined) 
+					li.append(child.text);
+				if (typeof child !== 'object')
+					li.append(child)
+				else if (child.childs !== undefined) 
+					li.append(Gen(child.childs));
+				li.on('click', 
+					function(hide) {
+						hide.preventDefault();
+						$(this.firstElementChild).slideToggle();
+						console.log(this.firstChild.data, $(this).find("li").length);
+						return false;
+					}
+				)
+				ul.append(li);
+			}
+			return ul;
+		}
+		$("body").append(Gen(m));
+		
+	</script>
+</body>
+</html>

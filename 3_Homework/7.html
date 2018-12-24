@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Карусель</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+	<body style="background-size:100% ;background-image: url(cat1.jpg)">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Меню
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<li><a href="file:///C:/html/3_Homework/index.html">Главная</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="C:\html\3_Homework\H1.html">Задание 1</a></li>
+						<li><a href="C:\html\3_Homework\H2.html">Задание 2</a></li>
+						<li><a href="C:\html\3_Homework\H3.html">Задание 3<span class="badge badge-success">New</span></a></li>
+					</ul>
+				</div>
+			</div>	
+		</nav>
+		<div>
+			<ol class="breadcrumb">
+				<li><a href="C:\html\3_Homework\index.html">Главная</a></li>
+				<li><a href="C:\html\3_Homework\H3.html">Задание 3</a></li>
+				<li class="active">Карусель</li>
+			</ol>
+		</div>
+		<div class="g"><h1>Карусель</h1></div>
+		
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+				<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<div style="text-align:center" >
+						<img class="first-slide" style="width:123vh" src="cosmos1.jpg" alt="First slide">
+					</div>
+					<div class="container">
+						<div class="carousel-caption">
+							<h1>Huge-LQG7</h1>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div style="text-align:center" >
+						<img class="second-slide" style="width:123vh" src="cosmos2.jpg" alt="Second slide">
+					</div>
+					<div class="container">
+						<div class="carousel-caption">
+							<h1>NGC 2770</h1>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div style="text-align:center" >
+						<img class="third-slide" style="width:123vh" src="cosmos3.jpg" alt="Third slide">
+					</div>
+					<div class="container">
+						<div class="carousel-caption">
+							<h1>ESO 137-001</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

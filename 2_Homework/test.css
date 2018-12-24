@@ -1,0 +1,129 @@
+	body {	
+		height:100%;
+		width:100%;
+		margin:0 0;
+	}
+	#rjomba.submenu{
+		display: none;
+	}
+
+	#batya.pupa{
+		display: none
+	}
+	
+	#batya1.pupa1{
+		display: none
+	}
+		
+	#rjaka.menu:hover > #rjomba{
+		display: block;
+	}
+
+	#golos1.golos1_class:hover > #batya{
+		display: block;
+	}
+	
+	#golos2.golos2_class:hover > #batya1{
+		display: block;
+	}
+
+	p{
+		margin:3px;
+	}
+	
+
+	.leftimg{
+		float:left;
+		margin: 7px;
+	}
+	#block1{
+		width: 75px; 
+		background: #fc0; 
+		padding: 5px; 
+		float: left; 
+		position: absolute; 
+		top: 10px; 
+		left: 15px; 
+	}
+	#block2{
+		width: 75px; 
+		background: #fc0; 
+		padding: 5px; 
+		float: left; 
+		position: absolute; 
+		top: 18px; 
+		left: 80px; 
+	}
+	
+	#block3{
+		width: 150px; 
+		background: #fc0; 
+		padding: 5px; 
+		float: left; 
+		position: absolute; 
+		top: 36px; 
+		left: 80px; 
+	}
+	
+	#imgg{
+		height:33%;
+		width:100%;
+	}
+	#gg {
+		font-size: 1.2em;
+		text-align: left;
+		margin: 3% 22%; 
+		padding: 10px;
+		height: 90%;
+	}
+	#container {
+		height: 80%;
+		margin: 0 auto; 
+	}
+	#header { 
+		font-size: 1em; 
+		background-color: #D71920;
+		text-decoration:underline;
+		height: 9%;
+	}
+	#nav, #aside {
+		float: left; 
+		width: 20%; 
+		padding: 5px;
+		
+	}
+	#rig {
+		float: right; 	
+		width: 20%; 
+		padding: 5px;
+		clear: both;
+	}
+	#content {
+		text-align: center;
+		font-size: 100%;
+		margin: 3% 22%; 
+		padding: 10px;
+		height: 90%;
+	}
+	
+	#aside {
+		float: right; color: #000;
+	}
+	h2 { 
+		margin: 0 0 1em; 
+	}
+	#footer { 
+		height: 20px;
+		clear: both; 
+		padding: 5px; 
+		background: #D71920; 
+		text-align: right;
+	}
+
+	@media print {
+		
+		#nav, #aside, #footer, #block1{
+			display: none;
+		}
+			
+	}

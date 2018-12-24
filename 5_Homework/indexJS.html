@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Задание 5 JS</title>
+</head>
+<body>
+	<div style="border: 3px dotted red; width: 12%">
+		<a href="indexJS.html">Реализация на JS</a>
+		<p style="margin: 0"><a href="indexJQuery.html">Реализация на JQuery</a></p>
+	</div>
+	<script type="text/javascript">
+		m = [
+			{
+			text: 'Животные',
+			childs: [
+					{text: 'Млекопитающие', 
+					childs: ['Коровы', 'Ослы', 'Собаки', 'Тигры']},
+					
+					{text: 'Другие', 
+					childs: ['Змеи', 'Птицы', 'Ящерицы']}
+					]},
+			{
+			text: 'Рыбы',
+			childs: [
+					{text: 'Аквариумные', 
+					childs: ['Гуппи','Скалярии']},
+					
+					{
+					text: 'Морские', 
+					childs: ['Морская форель']}
+					]},
+			{
+			text: 'Вирусы', 
+			childs: [
+					{
+					text:'Жизненный цикл вируса', 
+					childs: ['Прикрепление', 'Проникновение', 'Лишение оболочек', {	text:'Репликация', 
+																					childs: ['Сбор'] }, 'Выход из клетки']},
+					{
+					text:'Капсид', 
+					childs: ['Спиральный', 'Икосаэдрический', 'Продолговатый', 	'Комплексный']}
+					]}
+			];
+		
+		function Gen(childs) {              
+			var ul = document.createElement('ul');
+			for (var child of childs) {
+				var li = document.createElement('li');
+				if (child.text !== undefined) // Название подраздела
+					li.append(child.text);
+					
+				if (typeof child !== 'object') // Пункт подраздела
+					li.append(child);
+					
+				else if (child.childs !== undefined) // Если у ребёнка есть дети
+					li.append(Gen(child.childs));
+				ul.append(li);
+				}
+			return ul;
+			}
+		document.body.append(Gen(m));
+		
+		function info(element) {
+			if (element.childNodes === undefined)
+				return
+			
+			for (var el of element.childNodes) {
+				if (el.nodeName === "UL")
+					console.log("ul Children: " + el.children.length)
+				else
+					console.log(el.nodeName, el.nodeValue);
+				info(el);
+			}
+		}
+		info(document);	
+		
+	</script>
+</body>
+</html>

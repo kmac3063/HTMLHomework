@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Задание 4</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<header>
+			<h1 class="md">
+				Задание 4
+			</h1>
+		</header>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#panel1">Задание 4.1</a></li>
+			<li><a data-toggle="tab" href="#panel2">Задание 4.2</a></li>
+			<li><a data-toggle="tab" href="#panel3">Задание 4.3</a></li>
+			<li><a data-toggle="tab" href="#panel4">Задание 4.4</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="panel1" class="tab-pane fade in active" >
+				<div class="row">
+					<div class="col-xs-4" class="col-sm-4" class="col-md-4" class="col-lg-4">
+						<h4>Квадрат</h4>
+						<form action="" method="post" name="test" id="form">
+							<p><label for="a">Сторона:</label></p>
+							<input class="user" type="text" name="a" placeholder="Сторона" id="a">
+							<input style="text-align:center" type="button" onclick="square(document.getElementById('form'))" name="submit" value="Вычислить площадь" />
+						</form>
+					</div>
+					<div class="col-xs-4" class="col-sm-4" class="col-md-4" class="col-lg-4">
+						<h4>Круг</h4>
+						<form action="" method="post" name="test" id="form1">
+							<p><label for="a">Радиус:</label></p>
+							<input class="user" type="text" name="a" placeholder="Радиус" id="a">
+							<input style="text-align:center" type="button" onclick="circle(document.getElementById('form1'))" name="submit" value="Вычислить площадь" />
+						</form>
+					</div>
+					<div class="col-xs-4" class="col-sm-4" class="col-md-4" class="col-lg-4">
+						<h4>Эллипс</h4>
+						<form action="" method="post" name="test" id="form2">
+							<p><label for="a">Длина большой полуоси:</label></p>
+							<input class="user" type="text" name="a" placeholder="Длина" id="a">
+							<p><label for="b">Длина меньшей полуоси:</label></p>
+							<input class="user" type="text" name="b" placeholder="Длина" id="b">
+							<input style="text-align:center" type="button" onclick="ellips(document.getElementById('form2'))" name="submit" value="Вычислить площадь" />
+						</form>
+					</div>
+					<div class="col-lg-12"><br><br></div>
+					<div class="col-xs-4" class="col-sm-4" class="col-md-4" class="col-lg-4">
+						<h4>Параллелограмм</h4>
+						<form action="" method="post" name="test" id="form3">
+							<p><label for="a">Длина:</label></p>
+							<input class="user" type="text" name="a" placeholder="Длина" id="a">
+							<p><label for="b">Ширина:</label></p>
+							<input class="user" type="text" name="b" placeholder="Ширина" id="b">
+							<input style="text-align:center" type="button" onclick="par(document.getElementById('form3'))" name="submit" value="Вычислить площадь" />
+						</form>
+					</div>
+					<div class="col-xs-4" class="col-sm-4" class="col-md-4" class="col-lg-4">
+						<h4>Трапеция</h4>
+						<form action="" method="post" name="test" id="form4">
+							<p><label for="a">Длина меньшего основания</label></p>
+							<input class="user" type="text" name="a" placeholder="Длина" id="a">
+							<p><label for="b">Длина большего основания</label></p>
+							<input class="user" type="text" name="b" placeholder="Длина" id="b">
+							<p><label for="c">Высота</label></p>
+							<input type="text" name="c" placeholder="Высота" id="c">
+							<input style="text-align:center" type="button" onclick="trap(document.getElementById('form4'))" name="submit" value="Вычислить площадь" />
+						</form>
+					</div>
+					<div class="col-xs-4" class="col-sm-4" class="col-md-4" class="col-lg-4">
+						<h4>Треугольник</h4>
+						<form action="" method="post" name="test" id="form5">
+							<p><label for="a">Длина стороны:</label></p>
+							<input class="user" type="text" name="a" placeholder="Длина" id="a">
+							<p><label for="b">Высота, проведённая к этой длине:</label></p>
+							<input class="user" type="text" name="b" placeholder="Высота" id="b">
+							<input style="text-align:center" type="button" onclick="tr(document.getElementById('form5'))" name="submit" value="Вычислить площадь" />
+						</form>
+					</div>
+				</div>
+			</div>		
+			<div id="panel2" class="tab-pane fade">
+			<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Суть</th>
+					<th scope="col">Выполнить</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>Определить десятый член последовательности Фиббоначи</td>
+					<td><input type="button" name="enter" value="Определить" onClick="fib()"/></td>
+				</tr>
+				<tr>
+					<th scope="row">5</th>
+					<td>Найти сумму первых двадцати элементов последовательности X, X/3, X/5, ... . 
+						<div>
+							<form action="" method="post" name="test" id="form6">
+								<label for="a">X:</label>
+								<input class="user" type="text" name="a" placeholder="X" id="a">
+							</form>
+						</div>
+					</td>
+					<td>	
+						<input style="text-align:center" type="button" onclick="sumPos(document.getElementById('form6'))" name="submit" value="Найти" />
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">10</th>
+					<td>
+						Найти и напечатать все целые числа, кратные 31, 
+						<p>в интервале от -800 до +800 и подсчитать их количество.</p>
+					</td>
+					<td><input type="button" name="enter" value="Найти" onClick="inte()"/></td>
+				</tr>
+				<tr>
+					<th scope="row">15</th>
+					<td>
+						Найти сумму (1х100)+(3x98)+(5х96)+...+(51x50)
+					</td>
+					<td><input type="button" name="enter" value="Найти" onClick="findS()"/></td>
+				</tr>
+				<tr>
+					<th scope="row">23</th>
+					<td>Разложить заданное натуральное N на простые множители 
+						<div>
+							<form action="" method="post" name="test" id="form7">
+								<label for="a">N:</label>
+								<input class="user" type="text" name="a" placeholder="N" id="a">
+							</form>
+						</div>
+					</td>
+					<td>	
+						<input style="text-align:center" type="button" onclick="comm(document.getElementById('form7'))" name="submit" value="Разложить" />
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			</div>		
+			<div id="panel3" class="tab-pane fade">
+				<div><h2>6 задание</h2>
+					<div><input type="button" name="button4" value="Построить матрицу 6x6" onClick="creat1();"></div>
+					<div><input type="button" name="button5" value="Рассортировать массивы по знаку" onClick="sor();"></div>
+				</div>
+				<br>
+				<div><h2>9 задание</h2>
+					<div><input type="button" name="button6" value="Построить матрицу 10x10" onClick="creat2();"></div>
+					<div><input type="button" name="button7" value="Найти максималь­ный по абсолютной величине элемент и поменять его местами с первым эле­ментом." onClick="res();"></div>
+				</div>
+				<br>
+				<div><h2>12 задание</h2>
+					<div><input type="button" name="button2" value="Построить матрицу 6x5" onClick="creat();"></div>
+					<div><input type="button" name="button3" value="Умножить каждый элемент на номер соответствующей строки" onClick="mult();"></div>
+				</div><br>
+			</div>	
+			<div id="panel4" class="tab-pane fade">
+				<div>
+					<h4>Возвращает случайное целое число между min (включительно) и max (не включая max)</h4>
+					<form action="" method="post" name="test" id="form11">
+						<label for="max">Введите max:</label>
+						<input style="width:30vh" class="user" type="text" name="max" placeholder="max" id="max">
+						<div>
+							<label for="min">Введите min:</label>
+							<input style="width:30vh" class="user" type="text" name="min" placeholder="min" id="min">
+						</div>	
+					</form>
+					<input style="text-align:center" type="button" onclick="getR(document.getElementById('form11'))" name="submit" value="getRandomInt(min, max)" />
+				</div>
+				<div><br>
+					<h4>Возвращает массив со сгенерированными значениями через функцию getRandomInt</h4>
+					<form action="" method="post" name="test" id="form12">
+						<label for="n">Введите n:</label>
+						<input style="width:30vh" class="user" type="text" name="n" placeholder="n" id="n">
+					</form>
+					<input style="text-align:center" type="button" onclick="getArray(document.getElementById('form12'))" name="submit" value="getArray(n)" />
+				<div><br>
+					<h4>Возвращает отсортированный массив.</h4>
+					<input type="button" onclick="getResultArray()" name="submit" value="getResultArray(a)" />
+				</div>
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 content">
+						<br><h4>Составить матрицу змейкой(1).</h4>
+						<input style="width:100px" type="button" onclick="getMatrix2(1,2,3,4,5,6,7,8,9)" name="submit" value="getMatrix(3x3)" />
+						<input style="width:100px" type="button" onclick="getMatrix2(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)" name="submit" value="getMatrix(4x4)" />
+						<input style="width:100px" type="button" onclick="getMatrix2(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25)" name="submit" value="getMatrix(5x5)" />
+						<table class="table-bordered table-striped" id="matrixTable1">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 content">
+						<br><h4>Составить матрицу змейкой(4).</h4>
+						<input style="width:100px" type="button" onclick="getMatrix1(1,2,3,4,5,6,7,8,9)" name="submit" value="getMatrix(3x3)" />
+						<input style="width:100px" type="button" onclick="getMatrix1(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)" name="submit" value="getMatrix(4x4)" />
+						<input style="width:100px" type="button" onclick="getMatrix1(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25)" name="submit" value="getMatrix(5x5)" />
+						<table class="table-bordered table-striped" id="matrixTable">
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="C:\html\4_Homework\js\hom4.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
