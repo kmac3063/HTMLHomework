@@ -1,0 +1,366 @@
+<html>
+<head>
+	<title>Canvas & Mootools</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
+	<script type="text/javascript">
+		var canvas, ctx, balls, Time;
+		var arr = [];
+		TBall = new Class({
+			initialize: function(pX,pY) {
+				this.posX = pX;
+				this.posY = pY;
+				this.colBall = 'rgb('+Math.floor(Math.random()*256)+','
+				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+				this.rBall = 5+Math.random()*40;
+			},
+			posX: 0,
+			posY: 0,
+			colBall:"rgb(0,0,0)",
+			rBall: 0,
+			colorBall: function(ctx){
+				with (this){
+					var gradient = ctx.createRadialGradient(posX+rBall/4,
+					posY-rBall/6, rBall/8, posX, posY, rBall);
+					gradient.addColorStop(0, '#fff');
+					gradient.addColorStop(0.85, colBall);
+					return gradient;
+				}
+			},
+			draw : function(ctx){
+				with (this){
+					ctx.fillStyle = colorBall(ctx);
+					ctx.beginPath();
+					ctx.arc(posX, posY, rBall, 0, 2*Math.PI, false);
+					ctx.closePath();
+					ctx.fill();
+				}
+			}
+		});
+		Triangle= new Class({
+			initialize: function(pX,pY){
+				this.posX = pX;
+				this.posY = pY;
+				this.colTriangle = 'rgb('+Math.floor(Math.random()*256)+','
+				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+				this.rTriangle = 5+Math.random()*25;
+			},
+			posX: 0,
+			posY: 0,
+			colTriangle:"rgb(0,0,0)",
+			rTriangle: 0,
+			colorTriangle: function(ctx){
+				with (this){
+					var gradient = ctx.createRadialGradient(posX+rTriangle/4,
+					posY-rTriangle/6, rTriangle/8, posX, posY, rTriangle);
+					gradient.addColorStop(0, '#fff');
+					gradient.addColorStop(0.85, colTriangle);
+					return gradient;
+				}
+			},
+			draw : function (ctx){
+				with (this){
+					ctx.fillStyle = colorTriangle(ctx);
+					ctx.beginPath();
+					ctx.moveTo(posX,posY );
+					ctx.lineTo(posX+rTriangle,posY+rTriangle);
+					ctx.lineTo(posX+rTriangle,posY-rTriangle);
+					ctx.fill();
+				}
+			}
+		});
+		Rectangle = new Class({
+			initialize: function(pX,pY){
+				this.posX = pX;
+				this.posY = pY;
+				this.colRectangle = 'rgb('+Math.floor(Math.random()*256)+','
+				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+				this.rRectangle = 5+Math.random()*25;
+			},
+			colRectangle:"rgb(0,0,0)",
+			rRectangle: 0,
+			colorRectangle: function(ctx){
+				with (this){
+					var gradient = ctx.createRadialGradient(posX+rRectangle/4,
+					posY-rRectangle/6, rRectangle/8, posX, posY, rRectangle);
+					gradient.addColorStop(0, '#fff');
+					gradient.addColorStop(0.85, colRectangle);
+					return gradient;
+				}
+			},
+			draw: function(ctx){
+				with (this){
+					ctx.fillStyle = colorRectangle(ctx);
+					ctx.beginPath();
+					ctx.fillRect(posX, posY, rRectangle, rRectangle);
+					ctx.fill();
+				}
+			}
+		});
+		function drawBack(ctx,col1,col2,w,h){
+			ctx.save();
+			var g = ctx.createLinearGradient(0,0,0,h);
+			g.addColorStop(1,col1);
+			g.addColorStop(0,col2);
+			ctx.fillStyle = g;
+			ctx.fillRect(0,0,w,h);
+			ctx.restore();
+		}
+		function init(){
+			canvas = document.getElementById('canvas');
+			if (canvas.getContext){
+				ctx = canvas.getContext('2d');
+				drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+				balls = [];
+				for (var i = 1; i<=10;i++){
+					var item = new TBall(10+Math.random()*(canvas.width-30),
+					10+Math.random()*(canvas.height-30));
+					item.draw(ctx);
+					balls.push(item);
+				}
+			}
+		}
+		function goInput(event){
+			var x = event.clientX;
+			var y = event.clientY;
+			var Figure=Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+			if (Figure==1){
+				var item = new TBall(x,y);
+				item.draw(ctx);
+				balls.push(item);
+			}
+			if (Figure==2){
+				var item = new Triangle(x,y);
+				item.draw(ctx);
+				balls.push(item);
+			}
+			if (Figure==3){
+				var item = new Rectangle(x,y);
+				item.draw(ctx);
+				balls.push(item);
+			}
+			arr[balls.length-1] = Math.floor(Math.random()*(5-1))+1;
+		}
+		function moveBallup(){
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+				balls[i].posX = balls[i].posX + (Math.random()*4-2);
+				balls[i].posY = balls[i].posY + (Math.random()*2-4);
+				makeBigger(balls[i]);
+				if (balls[i].rBall > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rTriangle > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rRectangle > 50) {
+					balls.splice(i,1);
+				}
+				balls[i].draw(ctx);
+				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0))
+					balls.splice(i,1);
+				else
+					i++;
+			}
+		}
+		function moveBalldown(){
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+				balls[i].posX = balls[i].posX - (Math.random()*4-2);
+				balls[i].posY = balls[i].posY - (Math.random()*2-4);
+				makeBigger(balls[i]);
+				if (balls[i].rBall > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rTriangle > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rRectangle > 50) {
+					balls.splice(i,1);
+				}
+				balls[i].draw(ctx);
+				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0))
+					balls.splice(i,1);
+				else
+					i++;
+			}
+		}
+		function moveBallleft(){
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+				balls[i].posX = balls[i].posX + (Math.random()*2-4);
+				balls[i].posY = balls[i].posY + (Math.random()*4-2);
+				makeBigger(balls[i]);
+				if (balls[i].rBall > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rTriangle > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rRectangle > 50) {
+					balls.splice(i,1);
+				}
+				balls[i].draw(ctx);
+				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0))
+					balls.splice(i,1);
+				else
+					i++;
+			}
+		}
+		function moveBallright(){
+
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+				balls[i].posX = balls[i].posX - (Math.random()*2-4);
+				balls[i].posY = balls[i].posY - (Math.random()*4-2);
+				makeBigger(balls[i]);
+				if (balls[i].rBall > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rTriangle > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rRectangle > 50) {
+					balls.splice(i,1);
+				}
+				balls[i].draw(ctx);
+				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0))
+					balls.splice(i,1);
+				else
+					i++;
+			}
+		}
+		function moveBallchaos(){
+			drawBack(ctx,'black','#444444',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+					var k = Math.floor(Math.random()*(5-1))+1;
+					if (k == 1) {
+						balls[i].posX = balls[i].posX + (Math.random()*4-2);
+						balls[i].posY = balls[i].posY + (Math.random()*2-4);
+					}
+					if (k == 2) {
+						balls[i].posX = balls[i].posX - (Math.random()*4-2);
+						balls[i].posY = balls[i].posY - (Math.random()*2-4);
+					}
+					if (k == 3) {
+						balls[i].posX = balls[i].posX + (Math.random()*2-4);
+						balls[i].posY = balls[i].posY + (Math.random()*4-2);
+					}
+					if (k == 4) {
+						balls[i].posX = balls[i].posX - (Math.random()*2-4);
+						balls[i].posY = balls[i].posY - (Math.random()*4-2);
+					}
+					makeBigger(balls[i]);
+					if (balls[i].rBall > 50) {
+					balls.splice(i,1);
+					}
+					if (balls[i].rTriangle > 50) {
+						balls.splice(i,1);
+					}
+					if (balls[i].rRectangle > 50) {
+						balls.splice(i,1);
+					}
+					balls[i].draw(ctx);
+					if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0))
+						balls.splice(i,1);
+					else
+						i++;
+			}
+		}
+		function moveBallrandom(){
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+					var k = arr[i];
+					if (k == 1) {
+						balls[i].posX = balls[i].posX + (Math.random()*4-2);
+						balls[i].posY = balls[i].posY + (Math.random()*2-4);
+					}
+					if (k == 2) {
+						balls[i].posX = balls[i].posX - (Math.random()*4-2);
+						balls[i].posY = balls[i].posY - (Math.random()*2-4);
+					}
+					if (k == 3) {
+						balls[i].posX = balls[i].posX + (Math.random()*2-4);
+						balls[i].posY = balls[i].posY + (Math.random()*4-2);
+					}
+					if (k == 4) {
+						balls[i].posX = balls[i].posX - (Math.random()*2-4);
+						balls[i].posY = balls[i].posY - (Math.random()*4-2);
+					}
+					makeBigger(balls[i]);
+					if (balls[i].rBall > 50) {
+						balls.splice(i,1);
+						arr.splice(i,1);
+					}
+					if (balls[i].rTriangle > 50) {
+						balls.splice(i,1);
+						arr.splice(i,1);
+					}
+					if (balls[i].rRectangle > 50) {
+						balls.splice(i,1);
+						arr.splice(i,1);
+					}
+					balls[i].draw(ctx);
+					if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)){
+						balls.splice(i,1);
+						arr.splice(i,1);
+					}
+					else
+						i++;
+			}
+		}
+		function GetArray(){
+			for (var i = 0; i < balls.length;i++){
+					var k = Math.floor(Math.random()*(5-1))+1;
+					arr[i] = k;
+			}
+			MoveRandom(arr);
+		}
+		function makeBigger(Ball){
+				Ball.rBall = Ball.rBall + 0.2;
+				Ball.rRectangle = Ball.rRectangle + 0.2;
+				Ball.rTriangle = Ball.rTriangle + 0.2;
+		}
+
+		function MoveUp(){
+			clearInterval(Time);
+			Time = setInterval('moveBallup();',50);
+		}
+		function MoveDown(){
+			clearInterval(Time);
+			Time = setInterval('moveBalldown();',50);
+		}
+		function MoveLeft(){
+			clearInterval(Time);
+			Time = setInterval('moveBallleft();',50);
+		}
+		function MoveRight(){
+			clearInterval(Time);
+			Time = setInterval('moveBallright();',50);
+		}
+		function MoveChaos(){
+			clearInterval(Time);
+			Time = setInterval('moveBallchaos();',50);
+		}
+		function MoveRandom(){
+			clearInterval(Time);
+			Time = setInterval('moveBallrandom();',50);
+		}
+	</script>
+	<style type="text/css">
+		canvas { border: 1px solid blue; }
+	</style>
+</head>
+<body onload="init();">
+	<canvas id="canvas" width="600" height="400" onclick="goInput(event);">
+	</canvas>
+	<form>
+		<input type = "button" value = "Up^" onclick="MoveUp()">
+		<input type="button" value = "<Left" onclick="MoveLeft()">
+		<input type="button" value = "Down" onclick="MoveDown()">
+		<input type="button" value = "Right>" onclick="MoveRight()">
+		<input type="button" value = "~Haotic~" onclick="MoveChaos()">
+		<input type="button" value = "Random!" onclick="GetArray();">
+		<input type = "button" value = "Please! Stop!" onclick="clearInterval(Time);">
+	</form>
+</body>
+</html>
